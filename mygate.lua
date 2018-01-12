@@ -16,7 +16,7 @@ function handler.message(fd, msg, sz)
     local c = connection[fd]
     local agent = agentlist[fd]
     if agent then
-        -- skynet.redirect(agent, c.client, "client", 1, msg, sz)
+        skynet.redirect(agent, c.client, "client", 1, msg, sz)
         print("接收到客户端消息,传给agent服务处理")
     else
         print("没有agent处理该消息")
