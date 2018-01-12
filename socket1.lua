@@ -1,6 +1,6 @@
 local skynet = require "skynet"
 require "skynet.manager"    -- import skynet.register
-local socket = require "socket"
+local socket = require "skynet.socket"
 
 local proto = require "proto"
 local sproto = require "sproto"

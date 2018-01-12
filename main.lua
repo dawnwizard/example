@@ -5,6 +5,6 @@ skynet.start(function()
     -- 启动函数里调用Skynet API开发各种服务
     print("======Server start=======")
 
-    skynet.newservice("socket2")
+    skynet.newservice("socket1")
     skynet.exit()
 end)
