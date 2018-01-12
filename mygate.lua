@@ -1,6 +1,6 @@
 local skynet = require "skynet"
 local gateserver = require "snax.gateserver"
-local netpack = require "netpack"
+-- local netpack = require "netpack"
 -- local common = require "common"
 
 local connection = {}   -- fd -> connection : { fd , ip }
