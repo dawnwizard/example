@@ -1,5 +1,5 @@
 local skynet = require "skynet"
-local common = require "common"
+-- local common = require "common"
 
 local gate
 
