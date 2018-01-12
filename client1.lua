@@ -5,7 +5,7 @@ if _VERSION ~= "Lua 5.3" then
     error "Use lua 5.3"
 end
 
-local socket = require "client.socket"
+local socket = require "clientsocket"
 
 -- 通信协议
 local proto = require "proto"
@@ -17,17 +17,22 @@ local request = host:attach(sproto.new(proto.c2s))
 local fd = assert(socket.connect("127.0.0.1", 8888))
 
 local session = 0
+
+-- 封包(长度+内容)
+local function send_package(fd, pack)
+    local package = string.pack(">s2", pack)
+    socket.send(fd, package)
+end
+
 local function send_request(name, args)
     session = session + 1
     local str = request(name, args, session)
 
-    -- 解包测试
-    -- local host2 = sproto.new(proto.c2s):host "package"
-    -- local type,str2 = host2:dispatch(str)
-    -- print(type)
-    -- print(str2)
+    -- socket.send(fd, str)
 
-    socket.send(fd, str)
+    -- 添加数据长度包头,gateserver接收自动判断类型为data(gateserver使用了netpack进行解析)
+    -- skynet 提供了一个 lua 库 netpack ，用来把 tcp 流中的数据解析成 长度 + 内容的包。
+    send_package(fd,str);
 
     print("Request:", session)
 end
